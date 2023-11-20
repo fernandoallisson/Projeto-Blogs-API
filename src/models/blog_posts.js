@@ -8,10 +8,9 @@ const blogPostSchema = (sequelize, DataTypes) => {
   }, { timestamps: false, tableName: 'blog_posts', underscored: true });
 
   BlogPost.associate = (models) => {
-    BlogPost.belongsTo(models.User, { as: 'user', foreignKey: 'userId' });
+    BlogPost.belongsTo(models.users, { as: 'user', foreignKey: 'userId' });
   };
 
-  return BlogPost;
 }
 
 module.exports = blogPostSchema;

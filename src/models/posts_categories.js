@@ -11,7 +11,7 @@ const postsCategoriesSchema = (sequelize, DataTypes) => {
       foreignKey: 'postId',
       otherKey: 'categoryId',
     });
-    models.Categorie.belongsToMany(models.BlogPost, {
+    models.Category.belongsToMany(models.BlogPost, {
       as: 'blogPosts',
       through: PostsCategories,
       foreignKey: 'categoryId',
@@ -21,3 +21,5 @@ const postsCategoriesSchema = (sequelize, DataTypes) => {
 
   return PostsCategories;
 }
+
+module.exports = postsCategoriesSchema;
