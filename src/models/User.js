@@ -1,4 +1,4 @@
-const userSchema = (sequelize, DataTypes) => {
+const User = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "user",
     {
@@ -16,4 +16,4 @@ const userSchema = (sequelize, DataTypes) => {
   return User;
 };
 
-module.exports = userSchema;
+module.exports = User;
