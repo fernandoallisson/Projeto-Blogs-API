@@ -6,7 +6,10 @@ const User = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
       },
-      display_name: DataTypes.STRING(255),
+      displayName: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+      },
       email: DataTypes.STRING(255),
       password: DataTypes.STRING(255),
       image: DataTypes.STRING,
