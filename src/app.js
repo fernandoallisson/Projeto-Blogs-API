@@ -15,8 +15,4 @@ app.use(express.json());
 app.use(userRoutes);
 // Colocar as demais rotas aqui.
 
-// ...
-
-// É importante exportar a constante `app`, 
-// para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
