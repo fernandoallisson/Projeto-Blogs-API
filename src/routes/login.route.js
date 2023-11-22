@@ -2,9 +2,9 @@ const { Router } = require('express');
 
 const { loginController } = require('../controller/index');
 
-const userRouters = Router();
+const loginRouter = Router();
 
-userRouters.post('/login', loginController.login);
+loginRouter.post('/login', loginController.login);
 // Colocar as demais rotas aqui.
 
-module.exports = userRouters;
+module.exports = loginRouter;

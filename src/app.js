@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { userRoutes } = require('./routes/index');
+const { userRoutes, loginRouter } = require('./routes/index');
 
 // ...
 
@@ -13,6 +13,8 @@ app.get('/', (_request, response) => {
 
 app.use(express.json());
 app.use(userRoutes);
+app.use(loginRouter);
+
 // Colocar as demais rotas aqui.
 
 module.exports = app;

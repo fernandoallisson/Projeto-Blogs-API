@@ -4,12 +4,10 @@ const loginSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
 }).messages({
-  'string.email': 'Email inválido',
-  'string.empty': 'Senha deve ter no mínimo 6 caracteres',
-  'any.required': 'Campo obrigatório',
-  'any.min': 'Campo obrigatório',
+  'string.email': 'Invalid fields',
+  'string.empty': 'Some required fields are missing',
+  'any.required': 'Some required fields are missing',
+  'any.min': 'Invalid fields',
 });
 
-module.exports = {
-  loginSchema,
-};
+module.exports = loginSchema;
