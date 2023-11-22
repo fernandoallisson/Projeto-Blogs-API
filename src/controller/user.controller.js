@@ -6,9 +6,19 @@ const getAllUsers = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await userServices.createUser(email, password);
-  res.status(201).json(user);
+  const { displayName, image, email, password } = req.body;
+  const newUser = { displayName, image, email, password };
+  const response = await userServices.createUser(newUser);
+  console.log(response);
+  if (response.status === 'CONFLICT') {
+    const message = response.data;
+    return res.status(409).json(message);
+  }
+  if (response.status === 'BAD_REQUEST') {
+    const message = response.data;
+    return res.status(400).json(message);
+  }
+  return res.status(201).json(response.data);
 };
 
 module.exports = {
