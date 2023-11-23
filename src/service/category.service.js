@@ -8,7 +8,6 @@ const createCategory = async (name) => {
     return { status: 'BAD_REQUEST', data: validateMessage };
   }
   const category = await Category.create({ name });
-  console.log(category);
   return { status: 'SUCCESS', data: category };
 };
 

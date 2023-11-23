@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { userRoutes, loginRouter, categoryRouter } = require('./routes/index');
+const { userRoutes, loginRouter, categoryRouter, blogPostRouter } = require('./routes/index');
 
 // ...
 const app = express();
@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(userRoutes);
 app.use(loginRouter);
 app.use(categoryRouter);
+app.use(blogPostRouter);
 
 // Colocar as demais rotas aqui.
 
