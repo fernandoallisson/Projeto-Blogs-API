@@ -5,7 +5,9 @@ const { User } = require('../models/index');
 const { createToken } = require('../Utils/createToken');
  
 const getAllUsers = async () => {
-  const users = await User.findAll();
+  const users = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
   return users;
 };
 

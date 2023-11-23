@@ -3,7 +3,6 @@ const express = require('express');
 const { userRoutes, loginRouter } = require('./routes/index');
 
 // ...
-
 const app = express();
 
 // não remova ou mova esse endpoint
