@@ -34,7 +34,18 @@ const createUser = async (dataUser) => {
   return { status: 'SUCCESS', data: { token } };
 };
 
+const getUserById = async (id) => {
+  const user = await User.findByPk(id, {
+    attributes: { exclude: ['password'] },
+  });
+  if (!user) {
+    return { error: { status: 404, message: 'User does not exist' } };
+  }
+  return user;
+};
+
 module.exports = {
   getAllUsers,
   createUser,
+  getUserById,
 };
