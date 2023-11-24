@@ -1,4 +1,4 @@
-const validateSchema = require('../Utils/validateSchema');
+const { validateSchema } = require('../Utils/validateSchema');
 const { loginSchema } = require('../Schemas/index'); 
 const { User } = require('../models/index');
 

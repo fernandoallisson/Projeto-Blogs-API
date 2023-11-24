@@ -7,7 +7,6 @@ const validateHeaders = async (req, res, next) => {
   }
   const token = authorization.split('Bearer ')[1];
   const validate = await validateToken(token);
-  console.log(validate);
   if (validate.error) {
     return res.status(401).json({ message: 'Expired or invalid token' });
   }

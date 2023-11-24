@@ -2,8 +2,8 @@ const { blogPostServices } = require('../service/index');
 
 const createBlogPost = async (req, res) => {
   const { title, content, categoryIds } = req.body;
-  const { id } = req.user;
-  const response = await blogPostServices.createBlogPost(title, content, categoryIds, id);
+  const { user } = req;
+  const response = await blogPostServices.createPost({ title, content, categoryIds, user });
   if (response.status === 'BAD_REQUEST') {
     return res.status(400).json(response.data);
   }

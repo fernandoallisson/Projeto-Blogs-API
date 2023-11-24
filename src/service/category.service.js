@@ -1,4 +1,4 @@
-const validateSchema = require('../Utils/validateSchema');
+const { validateSchema } = require('../Utils/validateSchema');
 const { categorySchema } = require('../Schemas/index'); 
 const { Category } = require('../models/index');
 
