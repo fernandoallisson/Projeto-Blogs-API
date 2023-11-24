@@ -6,5 +6,6 @@ const blogPostRouter = Router();
 
 blogPostRouter.post('/post', validateHeaders, blogPostController.createBlogPost);
 blogPostRouter.get('/post', validateHeaders, blogPostController.getAllBlogPosts);
+blogPostRouter.get('/post/:id', validateHeaders, blogPostController.getBlogPostById);
 
 module.exports = blogPostRouter;
