@@ -10,6 +10,15 @@ const createBlogPost = async (req, res) => {
   return res.status(201).json(response.data);
 };
 
+const getAllBlogPosts = async (_req, res) => {
+  const response = await blogPostServices.getAllPosts();
+  if (response.status === 'BAD_REQUEST') {
+    return res.status(400).json(response.data);
+  }
+  return res.status(200).json(response.data);
+};
+
 module.exports = {
   createBlogPost,
+  getAllBlogPosts,
 };
