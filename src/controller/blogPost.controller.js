@@ -27,8 +27,25 @@ const getBlogPostById = async (req, res) => {
   return res.status(200).json(response.data);
 };
 
+const updateBlogPost = async (req, res) => {
+  const { id: postId } = req.params;
+  const { title, content } = req.body;
+  const { id: userId } = req.user.data.payload;
+  const newData = { title, content };
+
+  const response = await blogPostServices.updatePost(newData, userId, postId);
+  if (response.status === 'BAD_REQUEST') {
+    return res.status(400).json(response.data.message);
+  }
+  if (response.status === 'UNAUTHORIZED') {
+    return res.status(401).json(response.data);
+  }
+  return res.status(200).json(response.data);
+};
+
 module.exports = {
   createBlogPost,
   getAllBlogPosts,
   getBlogPostById,
+  updateBlogPost,
 };

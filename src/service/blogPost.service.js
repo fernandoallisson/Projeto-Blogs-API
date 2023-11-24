@@ -1,6 +1,6 @@
 const { BlogPost, Category, PostCategory, User } = require('../models/index');
-const { validatePost } = require('../Utils/validateSchema');
-const { blogPostSchema } = require('../Schemas/index');
+const { validatePost, validateSchema } = require('../Utils/validateSchema');
+const { blogPostSchema, updatePostSchema } = require('../Schemas/index');
 
 const createPost = async ({ title, content, user, categoryIds }) => {
   const validationError = validatePost(blogPostSchema, { title, content, categoryIds });
@@ -48,8 +48,28 @@ const getPostById = async (id) => {
   return { status: 'SUCCESS', data: post };
 };
 
+const updatePost = async (newPost, userId, postId) => {
+  const validateMessage = validateSchema(updatePostSchema, newPost);
+  if (validateMessage) return { status: 'BAD_REQUEST', data: { message: validateMessage } };
+  console.log(userId, postId);
+  const auth = Number(userId) === Number(postId);
+  if (!auth) return { status: 'UNAUTHORIZED', data: { message: 'Unauthorized user' } };
+
+  await BlogPost.update(newPost, { where: { id: postId } });
+
+  const updatedPost = await BlogPost.findByPk(postId, {
+    include: [
+      { model: Category, as: 'categories' },
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    ],
+  });
+
+  return { status: 'SUCCESS', data: updatedPost };
+};
+
 module.exports = {
   createPost,
   getAllPosts,
   getPostById,
+  updatePost,
 };
