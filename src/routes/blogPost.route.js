@@ -3,7 +3,11 @@ const { blogPostController } = require('../controller/index');
 const validateHeaders = require('../Middlewares/validate-headers');
 
 const blogPostRouter = Router();
-
+blogPostRouter.get(
+  '/post/search/',
+  validateHeaders,
+  blogPostController.searchBlogPost,
+);
 blogPostRouter.post('/post', validateHeaders, blogPostController.createBlogPost);
 blogPostRouter.get('/post', validateHeaders, blogPostController.getAllBlogPosts);
 blogPostRouter.get('/post/:id', validateHeaders, blogPostController.getBlogPostById);

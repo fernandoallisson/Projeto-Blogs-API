@@ -57,10 +57,20 @@ const deleteBlogPost = async (req, res) => {
   return res.status(204).end();
 };
 
+const searchBlogPost = async (req, res) => {
+  const { q } = req.query;
+  const response = await blogPostServices.searchBlogPost(q);
+  if (response.status === 'BAD_REQUEST') {
+    return res.status(400).json(response.data);
+  }
+  return res.status(200).json(response.data);
+};
+
 module.exports = {
   createBlogPost,
   getAllBlogPosts,
   getBlogPostById,
   updateBlogPost,
   deleteBlogPost,
+  searchBlogPost,
 };
