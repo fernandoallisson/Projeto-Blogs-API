@@ -44,8 +44,18 @@ const getUserById = async (id) => {
   return user;
 };
 
+const excludeMe = async (id) => {
+  const user = await User.findByPk(id);
+  if (!user) {
+    return { status: 'BAD_REQUEST', data: { message: 'User does not exist' } };
+  }
+  await User.destroy({ where: { id } });
+  return { status: 'SUCCESS', data: { message: 'User deleted successfully' } };
+};
+
 module.exports = {
   getAllUsers,
   createUser,
   getUserById,
+  excludeMe,
 };

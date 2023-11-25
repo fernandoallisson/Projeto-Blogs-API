@@ -8,5 +8,6 @@ const userRouters = Router();
 userRouters.get('/user', validateHeaders, userController.getAllUsers);
 userRouters.get('/user/:id', validateHeaders, userController.getUserById);
 userRouters.post('/user', userController.createUser);
+userRouters.delete('/user/me', validateHeaders, userController.excludeMe);
 
 module.exports = userRouters;
