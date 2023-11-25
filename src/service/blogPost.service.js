@@ -51,7 +51,6 @@ const getPostById = async (id) => {
 const updatePost = async (newPost, userId, postId) => {
   const validateMessage = validateSchema(updatePostSchema, newPost);
   if (validateMessage) return { status: 'BAD_REQUEST', data: { message: validateMessage } };
-  console.log(userId, postId);
   const auth = Number(userId) === Number(postId);
   if (!auth) return { status: 'UNAUTHORIZED', data: { message: 'Unauthorized user' } };
 
@@ -67,15 +66,17 @@ const updatePost = async (newPost, userId, postId) => {
   return { status: 'SUCCESS', data: updatedPost };
 };
 
-const deletePost = async (userId, postId) => {
-  const auth = Number(userId) === Number(postId);
+const deletePost = async (postId, userId) => {
   const post = await BlogPost.findByPk(postId);
-
+  
   if (!post) return { status: 'BAD_REQUEST', data: { message: 'Post does not exist' } };
-  if (!auth) return { status: 'UNAUTHORIZED', data: { message: 'Unauthorized user' } };
-
-  await BlogPost.destroy({ where: { id: postId } });
-  return { status: 'SUCCESS' };
+  if (post) {
+    const id1 = post.userId;
+    const auth = Number(id1) === Number(userId);
+    if (!auth) return { status: 'UNAUTHORIZED', data: { message: 'Unauthorized user' } };
+    await BlogPost.destroy({ where: { id: postId } });
+    return { status: 'SUCCESS' };
+  }
 };
 
 module.exports = {

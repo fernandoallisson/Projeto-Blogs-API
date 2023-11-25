@@ -45,8 +45,9 @@ const updateBlogPost = async (req, res) => {
 
 const deleteBlogPost = async (req, res) => {
   const { id: postId } = req.params;
-  const { id: userId } = req.user.data.payload;
-  const response = await blogPostServices.deletePost(userId, postId);
+  const userId = req.user.data.payload.id; // USER ID DO TOKEN
+
+  const response = await blogPostServices.deletePost(postId, userId);
   if (response.status === 'UNAUTHORIZED') {
     return res.status(401).json(response.data);
   }
